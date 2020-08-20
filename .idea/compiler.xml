@@ -8,6 +8,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="netty-demo" />
+        <module name="test-server" />
+        <module name="test-client" />
+        <module name="rpc-common" />
+        <module name="rpc-core" />
+        <module name="rpc-api" />
       </profile>
     </annotationProcessing>
   </component>
