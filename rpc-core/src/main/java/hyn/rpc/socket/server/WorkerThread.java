@@ -30,6 +30,9 @@ public class WorkerThread implements Runnable {
         this.service = service;
     }
 
+    /**
+     * 利用反射对方法进行调用
+     */
     @Override
     public void run() {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());

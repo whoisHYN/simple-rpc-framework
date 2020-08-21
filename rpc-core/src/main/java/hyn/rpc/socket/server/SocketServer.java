@@ -1,5 +1,8 @@
 package hyn.rpc.socket.server;
 
+import hyn.rpc.registry.ServiceRegistry;
+import hyn.rpc.socket.server.handler.RequestHandler;
+import hyn.rpc.socket.server.handler.RequestHandlerThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,27 +21,32 @@ public class SocketServer {
 
     private static final Logger logger = LoggerFactory.getLogger(SocketServer.class);
     private final ExecutorService threadPool;
+    private static final int CORE_POOL_SIZE = 5;
+    public static final int MAXIMUM_POOL_SIZE = 50;
+    public static final int KEEP_ALIVE_TIME = 60;
+    public static final int BLOCKING_QUEUE_CAPACITY = 100;
+    private RequestHandler requestHandler = new RequestHandler();
+    private final ServiceRegistry serviceRegistry;
 
-    public SocketServer() {
-        int corePoolSize = 5;
-        int maxPoolSize = 50;
-        long keepAliveTime = 60;
-        BlockingQueue<Runnable> workingQueue = new ArrayBlockingQueue<>(100);
+    public SocketServer(ServiceRegistry serviceRegistry) {
+        this.serviceRegistry = serviceRegistry;
+        BlockingQueue<Runnable> workingQueue = new ArrayBlockingQueue<>(BLOCKING_QUEUE_CAPACITY);
         ThreadFactory threadFactory = Executors.defaultThreadFactory();
-        threadPool = new ThreadPoolExecutor(corePoolSize, maxPoolSize, keepAliveTime, TimeUnit.SECONDS,
+        threadPool = new ThreadPoolExecutor(CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE_TIME, TimeUnit.SECONDS,
                 workingQueue, threadFactory);
     }
 
-    public void register(Object service, int port) {
+    public void start(int port) {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
-            logger.info("服务器正在启动");
+            logger.info("服务器启动...");
             Socket socket;
             while ((socket = serverSocket.accept()) != null) {
-                logger.info("客户端已连接！IP为: " + socket.getInetAddress());
-                threadPool.execute(new WorkerThread(socket, service));
+                logger.info("消费方连接：{} : {}", socket.getInetAddress(), socket.getPort());
+                threadPool.execute(new RequestHandlerThread(socket, requestHandler, serviceRegistry));
             }
+            threadPool.shutdownNow();
         } catch (IOException e) {
-            logger.error("连接时发生错误", e);
+            logger.error("服务器启动时发生错误", e);
         }
     }
 }

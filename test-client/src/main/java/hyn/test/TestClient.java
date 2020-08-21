@@ -16,9 +16,11 @@ public class TestClient {
         HelloService service = proxy.getProxy(HelloService.class);
         HelloObject object = new HelloObject(12, "我是测试的服务消费方");
         while (true) {
-            Thread.sleep(2000);
-            String hello = service.hello(object);
-            System.out.println(hello);
+//            String hello = service.hello(object);
+            HelloObject res = service.transportObject();
+            System.out.println(res.getClass().getCanonicalName());
+            System.out.println(res.getId() + " " + res.getMessage());
+            Thread.sleep(5000);
         }
     }
 }
