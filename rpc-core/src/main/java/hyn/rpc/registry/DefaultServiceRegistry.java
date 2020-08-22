@@ -16,8 +16,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class DefaultServiceRegistry implements ServiceRegistry{
 
     private static final Logger logger = LoggerFactory.getLogger(DefaultServiceRegistry.class);
-    private final Map<String, Object> serviceMap = new ConcurrentHashMap<>(16);
-    private final Set<String> registeredService = ConcurrentHashMap.newKeySet();
+    private static final Map<String, Object> serviceMap = new ConcurrentHashMap<>(16);
+    private static final Set<String> registeredService = ConcurrentHashMap.newKeySet();
 
     /**
      * 注册服务，逻辑：将服务名和提供服务的对象保存在一个CHM中，并用一个并发安全的set保存已经注册的服务(使用服务的完整类名)

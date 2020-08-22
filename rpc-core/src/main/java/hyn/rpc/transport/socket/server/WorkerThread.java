@@ -1,4 +1,4 @@
-package hyn.rpc.socket.server;
+package hyn.rpc.transport.socket.server;
 
 import hyn.rpc.entity.RpcRequest;
 import hyn.rpc.entity.RpcResponse;
@@ -13,11 +13,12 @@ import java.lang.reflect.Method;
 import java.net.Socket;
 
 /**
- * 实际进行过程调用的工作线程
+ * 实际进行过程调用的工作线程,用于v1.0，已弃用
  *
  * @Author: HYN
  * 2020/8/20 4:17 下午
  */
+@Deprecated
 public class WorkerThread implements Runnable {
 
     private static final Logger logger = LoggerFactory.getLogger(WorkerThread.class);

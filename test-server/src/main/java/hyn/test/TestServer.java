@@ -4,7 +4,7 @@ import hyn.rpc.api.ByeService;
 import hyn.rpc.api.HelloService;
 import hyn.rpc.registry.DefaultServiceRegistry;
 import hyn.rpc.registry.ServiceRegistry;
-import hyn.rpc.socket.server.SocketServer;
+import hyn.rpc.transport.socket.server.SocketServer;
 import hyn.test.impl.ByeServiceImpl;
 import hyn.test.impl.HelloServiceImpl;
 

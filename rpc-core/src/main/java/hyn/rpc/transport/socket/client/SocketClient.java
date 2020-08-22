@@ -1,6 +1,9 @@
-package hyn.rpc.socket.client;
+package hyn.rpc.transport.socket.client;
 
+import hyn.rpc.RpcClient;
 import hyn.rpc.entity.RpcRequest;
+import hyn.rpc.proxy.RpcClientProxy;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,11 +18,19 @@ import java.net.Socket;
  * @Author: HYN
  * 2020/8/20 1:26 下午
  */
-public class SocketClient {
+@Slf4j
+public class SocketClient implements RpcClient{
 
-    private static final Logger logger = LoggerFactory.getLogger(SocketClient.class);
+    private String host;
+    private int port;
 
-    public Object sendRequest(RpcRequest request, String host, int port) {
+    public SocketClient(String host, int port) {
+        this.host = host;
+        this.port = port;
+    }
+
+    @Override
+    public Object sendRequest(RpcRequest request) {
         try (Socket socket = new Socket(host, port)) {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
@@ -27,7 +38,7 @@ public class SocketClient {
             objectOutputStream.flush();
             return objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            logger.error("调用时发生错误", e);
+            log.error("调用时发生错误", e);
             return null;
         }
     }

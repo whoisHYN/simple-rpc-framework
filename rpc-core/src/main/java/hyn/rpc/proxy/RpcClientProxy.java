@@ -1,8 +1,10 @@
 package hyn.rpc.proxy;
 
+import hyn.rpc.RpcClient;
 import hyn.rpc.entity.RpcRequest;
 import hyn.rpc.entity.RpcResponse;
-import hyn.rpc.socket.client.SocketClient;
+import hyn.rpc.transport.socket.client.SocketClient;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -14,14 +16,13 @@ import java.lang.reflect.Proxy;
  * @Author: HYN
  * 2020/8/20 12:27 上午
  */
+@Slf4j
 public class RpcClientProxy implements InvocationHandler {
 
-    private String host;
-    private int port;
+    private final RpcClient rpcClient;
 
-    public RpcClientProxy(String host, int port) {
-        this.host = host;
-        this.port = port;
+    public RpcClientProxy(RpcClient rpcClient) {
+        this.rpcClient = rpcClient;
     }
 
     @SuppressWarnings("unchecked")
@@ -31,13 +32,13 @@ public class RpcClientProxy implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        log.info("调用方法: {}#{}", method.getDeclaringClass().getName(), method.getName());
         RpcRequest request = RpcRequest.builder()
                 .interfaceName(method.getDeclaringClass().getName())
                 .methodName(method.getName())
                 .parameters(args)
                 .parameterTypes(method.getParameterTypes())
                 .build();
-        SocketClient client = new SocketClient();
-        return ((RpcResponse)client.sendRequest(request, host, port)).getData();
+        return rpcClient.sendRequest(request);
     }
 }

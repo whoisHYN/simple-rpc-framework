@@ -3,6 +3,7 @@ package hyn.test;
 import hyn.rpc.api.HelloObject;
 import hyn.rpc.api.HelloService;
 import hyn.rpc.proxy.RpcClientProxy;
+import hyn.rpc.transport.socket.client.SocketClient;
 
 /**
  * 测试服务消费方
@@ -12,7 +13,8 @@ import hyn.rpc.proxy.RpcClientProxy;
  */
 public class TestClient {
     public static void main(String[] args) throws InterruptedException {
-        RpcClientProxy proxy = new RpcClientProxy("localhost", 10000);
+        SocketClient socketClient = new SocketClient("localhost", 10000);
+        RpcClientProxy proxy = new RpcClientProxy(socketClient);
         HelloService service = proxy.getProxy(HelloService.class);
         HelloObject object = new HelloObject(12, "我是测试的服务消费方");
         while (true) {

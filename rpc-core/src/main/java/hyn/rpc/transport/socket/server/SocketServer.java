@@ -1,8 +1,8 @@
-package hyn.rpc.socket.server;
+package hyn.rpc.transport.socket.server;
 
 import hyn.rpc.registry.ServiceRegistry;
-import hyn.rpc.socket.server.handler.RequestHandler;
-import hyn.rpc.socket.server.handler.RequestHandlerThread;
+import hyn.rpc.transport.handler.RequestHandler;
+import hyn.rpc.transport.handler.RequestHandlerThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
