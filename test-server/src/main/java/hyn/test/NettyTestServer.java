@@ -2,8 +2,8 @@ package hyn.test;
 
 import hyn.rpc.RpcServer;
 import hyn.rpc.api.HelloService;
-import hyn.rpc.registry.DefaultServiceRegistry;
-import hyn.rpc.registry.ServiceRegistry;
+import hyn.rpc.provider.DefaultServiceProvider;
+import hyn.rpc.provider.ServiceProvider;
 import hyn.rpc.transport.netty.server.NettyServer;
 import hyn.test.impl.HelloServiceImpl;
 
@@ -12,10 +12,10 @@ import hyn.test.impl.HelloServiceImpl;
  */
 public class NettyTestServer {
     public static void main(String[] args) {
-        RpcServer server = new NettyServer();
-        ServiceRegistry registry = new DefaultServiceRegistry();
+        RpcServer server = new NettyServer("localhost", 10000, 2);
+        ServiceProvider provider = new DefaultServiceProvider();
         HelloService service = new HelloServiceImpl();
-        registry.register(service);
-        server.start(10000);
+        provider.addServiceProvider(service);
+        server.start();
     }
 }

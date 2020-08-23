@@ -1,6 +1,6 @@
 package hyn.rpc.transport.socket.server;
 
-import hyn.rpc.registry.ServiceRegistry;
+import hyn.rpc.provider.ServiceProvider;
 import hyn.rpc.transport.handler.RequestHandler;
 import hyn.rpc.transport.handler.RequestHandlerThread;
 import org.slf4j.Logger;
@@ -26,10 +26,10 @@ public class SocketServer {
     public static final int KEEP_ALIVE_TIME = 60;
     public static final int BLOCKING_QUEUE_CAPACITY = 100;
     private RequestHandler requestHandler = new RequestHandler();
-    private final ServiceRegistry serviceRegistry;
+    private final ServiceProvider serviceProvider;
 
-    public SocketServer(ServiceRegistry serviceRegistry) {
-        this.serviceRegistry = serviceRegistry;
+    public SocketServer(ServiceProvider serviceProvider) {
+        this.serviceProvider = serviceProvider;
         BlockingQueue<Runnable> workingQueue = new ArrayBlockingQueue<>(BLOCKING_QUEUE_CAPACITY);
         ThreadFactory threadFactory = Executors.defaultThreadFactory();
         threadPool = new ThreadPoolExecutor(CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE_TIME, TimeUnit.SECONDS,
@@ -42,7 +42,7 @@ public class SocketServer {
             Socket socket;
             while ((socket = serverSocket.accept()) != null) {
                 logger.info("消费方连接：{} : {}", socket.getInetAddress(), socket.getPort());
-                threadPool.execute(new RequestHandlerThread(socket, requestHandler, serviceRegistry));
+                threadPool.execute(new RequestHandlerThread(socket, requestHandler, serviceProvider));
             }
             threadPool.shutdownNow();
         } catch (IOException e) {

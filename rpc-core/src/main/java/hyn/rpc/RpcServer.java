@@ -9,7 +9,6 @@ public interface RpcServer {
 
     /**
      * 启动服务器
-     * @param port
      */
-    void start(int port);
+    void start();
 }

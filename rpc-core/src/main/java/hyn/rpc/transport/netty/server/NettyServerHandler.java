@@ -2,8 +2,8 @@ package hyn.rpc.transport.netty.server;
 
 import hyn.rpc.entity.RpcRequest;
 import hyn.rpc.entity.RpcResponse;
-import hyn.rpc.registry.DefaultServiceRegistry;
-import hyn.rpc.registry.ServiceRegistry;
+import hyn.rpc.provider.DefaultServiceProvider;
+import hyn.rpc.provider.ServiceProvider;
 import hyn.rpc.transport.handler.RequestHandler;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -21,11 +21,11 @@ import lombok.extern.slf4j.Slf4j;
 public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> {
 
     private static RequestHandler requestHandler;
-    private static ServiceRegistry serviceRegistry;
+    private static ServiceProvider serviceProvider;
 
     public NettyServerHandler() {
         requestHandler = new RequestHandler();
-        serviceRegistry = new DefaultServiceRegistry();
+        serviceProvider = new DefaultServiceProvider();
     }
 
     @Override
@@ -33,7 +33,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> 
         try {
             log.info("服务器接收到请求: {}", msg);
             String interfaceName = msg.getInterfaceName();
-            Object service = serviceRegistry.getService(interfaceName);
+            Object service = serviceProvider.getServiceProvider(interfaceName);
             Object result = requestHandler.handle(msg, service);
             ChannelFuture channelFuture = ctx.writeAndFlush(RpcResponse.success(result));
             channelFuture.addListener(ChannelFutureListener.CLOSE);

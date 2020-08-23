@@ -21,6 +21,7 @@ public class JsonSerializer implements CommonSerializer {
 
     @Override
     public byte[] serialize(Object obj) {
+        log.info("本次使用的是JSON序列化");
         try {
             return objectMapper.writeValueAsBytes(obj);
         } catch (JsonProcessingException e) {
@@ -63,6 +64,6 @@ public class JsonSerializer implements CommonSerializer {
 
     @Override
     public int getCode() {
-        return SerializerCode.valueOf("JSON").getCode();
+        return SerializerCode.JSON.getCode();
     }
 }

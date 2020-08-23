@@ -2,8 +2,8 @@ package hyn.test;
 
 import hyn.rpc.api.ByeService;
 import hyn.rpc.api.HelloService;
-import hyn.rpc.registry.DefaultServiceRegistry;
-import hyn.rpc.registry.ServiceRegistry;
+import hyn.rpc.provider.DefaultServiceProvider;
+import hyn.rpc.provider.ServiceProvider;
 import hyn.rpc.transport.socket.server.SocketServer;
 import hyn.test.impl.ByeServiceImpl;
 import hyn.test.impl.HelloServiceImpl;
@@ -18,10 +18,10 @@ public class TestServer {
         //测试注册多个服务
         HelloService helloService = new HelloServiceImpl();
         ByeService byeService = new ByeServiceImpl();
-        ServiceRegistry serviceRegistry = new DefaultServiceRegistry();
-        serviceRegistry.register(helloService);
-        serviceRegistry.register(byeService);
-        SocketServer server = new SocketServer(serviceRegistry);
+        ServiceProvider serviceProvider = new DefaultServiceProvider();
+        serviceProvider.addServiceProvider(helloService);
+        serviceProvider.addServiceProvider(byeService);
+        SocketServer server = new SocketServer(serviceProvider);
         server.start(10000);
     }
 }

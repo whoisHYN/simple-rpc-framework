@@ -3,7 +3,9 @@ package hyn.rpc.transport.netty.server;
 import hyn.rpc.RpcServer;
 import hyn.rpc.codec.CommonDecoder;
 import hyn.rpc.codec.CommonEncoder;
+import hyn.rpc.serializer.CommonSerializer;
 import hyn.rpc.serializer.JsonSerializer;
+import hyn.rpc.serializer.KryoSerializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -20,8 +22,19 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class NettyServer implements RpcServer {
 
+    private final CommonSerializer serializer;
+
+    private String host;
+    private int port;
+
+    public NettyServer(String host, int port, int serializerCode) {
+        this.host = host;
+        this.port = port;
+        this.serializer = CommonSerializer.getSerializerByCode(serializerCode);
+    }
+
     @Override
-    public void start(int port) {
+    public void start() {
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
@@ -36,7 +49,7 @@ public class NettyServer implements RpcServer {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
                             ChannelPipeline pipeline = ch.pipeline();
-                            pipeline.addLast(new CommonEncoder(new JsonSerializer()))
+                            pipeline.addLast(new CommonEncoder(serializer))
                                     .addLast(new CommonDecoder())
                                     .addLast(new NettyServerHandler());
                         }

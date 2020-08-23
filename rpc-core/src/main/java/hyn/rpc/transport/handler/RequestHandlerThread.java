@@ -3,7 +3,7 @@ package hyn.rpc.transport.handler;
 import hyn.rpc.entity.RpcRequest;
 import hyn.rpc.entity.RpcResponse;
 import hyn.rpc.enumeration.ResponseCode;
-import hyn.rpc.registry.ServiceRegistry;
+import hyn.rpc.provider.ServiceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +13,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 /**
+ * Socket模式下服务端执行具体任务的线程
+ *
  * @Author: HYN
  * 2020/8/21 10:54 上午
  */
@@ -22,12 +24,12 @@ public class RequestHandlerThread implements Runnable {
 
     private Socket socket;
     private RequestHandler requestHandler;
-    private ServiceRegistry serviceRegistry;
+    private ServiceProvider serviceProvider;
 
-    public RequestHandlerThread(Socket socket, RequestHandler requestHandler, ServiceRegistry serviceRegistry) {
+    public RequestHandlerThread(Socket socket, RequestHandler requestHandler, ServiceProvider serviceProvider) {
         this.socket = socket;
         this.requestHandler = requestHandler;
-        this.serviceRegistry = serviceRegistry;
+        this.serviceProvider = serviceProvider;
     }
 
     @Override
@@ -36,7 +38,7 @@ public class RequestHandlerThread implements Runnable {
              ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream())) {
             RpcRequest request = (RpcRequest)objectInputStream.readObject();
             String interfaceName = request.getInterfaceName();
-            Object service = serviceRegistry.getService(interfaceName);
+            Object service = serviceProvider.getServiceProvider(interfaceName);
             if (service == null) {
                 objectOutputStream.writeObject(RpcResponse.fail(ResponseCode.CLASS_NOT_FOUND));
             } else {

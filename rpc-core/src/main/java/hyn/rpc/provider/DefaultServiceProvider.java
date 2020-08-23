@@ -1,7 +1,8 @@
-package hyn.rpc.registry;
+package hyn.rpc.provider;
 
 import hyn.rpc.enumeration.RpcError;
 import hyn.rpc.exception.RpcException;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,9 +14,9 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Author: HYN
  * 2020/8/20 11:34 下午
  */
-public class DefaultServiceRegistry implements ServiceRegistry{
+@Slf4j
+public class DefaultServiceProvider implements ServiceProvider {
 
-    private static final Logger logger = LoggerFactory.getLogger(DefaultServiceRegistry.class);
     private static final Map<String, Object> serviceMap = new ConcurrentHashMap<>(16);
     private static final Set<String> registeredService = ConcurrentHashMap.newKeySet();
 
@@ -26,7 +27,7 @@ public class DefaultServiceRegistry implements ServiceRegistry{
      * @param <T>
      */
     @Override
-    public <T> void register(T service) {
+    public <T> void addServiceProvider(T service) {
         String serviceName = service.getClass().getCanonicalName();
         //如果已经存在则结束执行
         if (registeredService.contains(serviceName)) {
@@ -37,15 +38,15 @@ public class DefaultServiceRegistry implements ServiceRegistry{
         if (interfaces.length == 0) {
             throw new RpcException(RpcError.SERVICE_NOT_IMPLEMENT_ANY_INTERFACE);
         }
-        //遍历所有接口，加入CHM
+        //遍历所有接口，接口名就是服务名，加入CHM
         for (Class<?> i : interfaces) {
             serviceMap.put(i.getCanonicalName(), service);
         }
-        logger.info("向接口: {} 注册服务: {}", interfaces, serviceName);
+        log.info("向接口: {} 注册服务: {}", interfaces, serviceName);
     }
 
     @Override
-    public Object getService(String serviceName) {
+    public Object getServiceProvider(String serviceName) {
         Object service = serviceMap.get(serviceName);
         if (service == null) {
             throw new RpcException(RpcError.SERVICE_NOT_FOUND);
