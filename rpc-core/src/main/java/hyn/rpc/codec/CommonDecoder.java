@@ -38,7 +38,7 @@ public class CommonDecoder extends ReplayingDecoder {
      */
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
-        //读取魔术
+        //读取魔数
         int magic = in.readInt();
         if (magic != MAGIC_NUMBER) {
             log.error("无法识别该协议包: {}", magic);
