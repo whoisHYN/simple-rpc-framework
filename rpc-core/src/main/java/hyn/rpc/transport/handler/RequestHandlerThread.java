@@ -16,7 +16,6 @@ import java.net.Socket;
  * Socket模式下服务端执行具体任务的线程
  *
  * @Author: HYN
- * 2020/8/21 10:54 上午
  */
 public class RequestHandlerThread implements Runnable {
 

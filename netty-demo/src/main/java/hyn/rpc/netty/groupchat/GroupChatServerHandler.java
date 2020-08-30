@@ -12,7 +12,6 @@ import java.text.SimpleDateFormat;
 /**
  * @Author: HYN
  * @Description:
- * @Date: 2020/8/9 4:53 下午
  * @Modified By:
  */
 public class GroupChatServerHandler extends SimpleChannelInboundHandler<String> {

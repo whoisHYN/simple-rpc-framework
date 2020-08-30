@@ -11,7 +11,6 @@ import java.io.Serializable;
  * 封装消费者向提供者发送的消息
  *
  * @Author: HYN
- * 2020/8/19 9:15 下午
  */
 @Data
 @Builder

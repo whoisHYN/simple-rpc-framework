@@ -15,7 +15,6 @@ import java.util.concurrent.*;
  * 远程方法调用的提供者（服务端）
  *
  * @Author: HYN
- * 2020/8/20 1:40 下午
  */
 public class SocketServer {
 

@@ -16,7 +16,6 @@ import java.net.Socket;
  * 实际进行过程调用的工作线程,用于v1.0，已弃用
  *
  * @Author: HYN
- * 2020/8/20 4:17 下午
  */
 @Deprecated
 public class WorkerThread implements Runnable {

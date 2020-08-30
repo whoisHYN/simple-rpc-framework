@@ -10,7 +10,6 @@ import java.io.Serializable;
  * 服务提供方在执行成功或失败后需要向消费方返回的信息
  *
  * @Author: HYN
- * 2020/8/19 9:29 下午
  */
 @Data
 @NoArgsConstructor

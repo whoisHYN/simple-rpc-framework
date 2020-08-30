@@ -29,7 +29,7 @@ public class CuratorUtils {
 
     private static final int BASE_SLEEP_TIME = 1000;
     private static final int MAX_RETRIES = 3;
-    public static final String ZK_REGISTER_ROOT_PATH = "/my-rpc";
+    public static final String ZK_REGISTER_ROOT_PATH = "/simple-rpc";
     private static final Map<String, List<String>> SERVICE_ADDRESS_MAP = new ConcurrentHashMap<>();
     private static final Set<String> REGISTERED_PATH_SET = ConcurrentHashMap.newKeySet();
     private static CuratorFramework zkClient;
@@ -38,7 +38,8 @@ public class CuratorUtils {
     private CuratorUtils() {}
 
     /**
-     * Create persistent nodes. Unlike temporary nodes, persistent nodes are not removed when the client disconnects
+     * Creating persistent nodes. Unlike temporary nodes, persistent nodes won't be removed
+     * when client disconnects
      *
      * @param path node path
      */
@@ -58,7 +59,7 @@ public class CuratorUtils {
     }
 
     /**
-     * Get the children under a node
+     * Get children under a node
      *
      * @param rpcServiceName rpc service name eg:hyn.rpc.HelloServicetest2version1
      * @return All child nodes under the specified node
@@ -80,7 +81,7 @@ public class CuratorUtils {
     }
 
     /**
-     * Clear the registry of data
+     * Clear all registry data
      */
     public static void clearRegistry(CuratorFramework zkClient) {
         REGISTERED_PATH_SET.stream().parallel().forEach(p -> {

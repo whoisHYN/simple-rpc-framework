@@ -14,7 +14,6 @@ import io.netty.handler.codec.string.StringEncoder;
 /**
  * @Author: HYN
  * @Description:
- * @Date: 2020/8/9 4:18 下午
  * @Modified By:
  */
 public class GroupChatServer {

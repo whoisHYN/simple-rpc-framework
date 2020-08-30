@@ -4,7 +4,6 @@ import hyn.rpc.enumeration.RpcError;
 
 /**
  * @Author: HYN
- * 2020/8/21 12:23 上午
  */
 public class RpcException extends RuntimeException {
 

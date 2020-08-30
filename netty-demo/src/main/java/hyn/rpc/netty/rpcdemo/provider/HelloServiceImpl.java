@@ -5,7 +5,6 @@ import hyn.rpc.netty.rpcdemo.api.HelloService;
 /**
  * @Author: HYN
  * @Description:
- * @Date: 2020/8/17 1:07 上午
  * @Modified By:
  */
 public class HelloServiceImpl implements HelloService {

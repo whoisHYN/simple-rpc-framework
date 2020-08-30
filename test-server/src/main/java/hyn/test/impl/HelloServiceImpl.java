@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @Author: HYN
- * 2020/8/20 9:43 下午
  */
 public class HelloServiceImpl implements HelloService {
 

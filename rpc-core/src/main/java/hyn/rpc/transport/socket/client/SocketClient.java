@@ -16,7 +16,6 @@ import java.net.Socket;
  * 远程方法调用的消费者（客户端）
  *
  * @Author: HYN
- * 2020/8/20 1:26 下午
  */
 @Slf4j
 public class SocketClient implements RpcClient{

@@ -9,7 +9,6 @@ import java.io.Serializable;
 /**
  * 测试API的实体类
  * @Author: HYN
- * 2020/8/20 5:15 下午
  */
 @Data
 @NoArgsConstructor

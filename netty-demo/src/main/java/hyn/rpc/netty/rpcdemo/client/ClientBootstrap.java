@@ -6,7 +6,6 @@ import hyn.rpc.netty.rpcdemo.netty.NettyClient;
 /**
  * @Author: HYN
  * @Description:
- * @Date: 2020/8/17 8:52 下午
  * @Modified By:
  */
 public class ClientBootstrap {

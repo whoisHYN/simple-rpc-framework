@@ -13,7 +13,6 @@ import java.util.Scanner;
 /**
  * @Author: HYN
  * @Description:
- * @Date: 2020/8/9 5:47 下午
  * @Modified By:
  */
 public class GroupChatClient {

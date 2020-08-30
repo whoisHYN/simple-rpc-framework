@@ -8,7 +8,6 @@ import hyn.rpc.transport.socket.client.SocketClient;
 /**
  * 测试多个服务注册
  * @Author: HYN
- * 2020/8/21 11:30 上午
  */
 public class TestClient2 {
     public static void main(String[] args) throws InterruptedException {

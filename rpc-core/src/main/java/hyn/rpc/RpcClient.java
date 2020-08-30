@@ -1,14 +1,16 @@
 package hyn.rpc;
 
 import hyn.rpc.entity.RpcRequest;
+import hyn.rpc.serializer.CommonSerializer;
 
 /**
  * 抽象出的服务消费者接口
  *
  * @Author: HYN
- * 2020/8/21 12:43 下午
  */
 public interface RpcClient {
+
+    int DEFAULT_SERIALIZER = CommonSerializer.DEFAULT_SERIALIZER;
 
     /**
      * 消费者调用服务

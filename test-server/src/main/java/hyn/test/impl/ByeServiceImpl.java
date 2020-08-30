@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @Author: HYN
- * 2020/8/21 11:31 上午
  */
 public class ByeServiceImpl implements ByeService {
 

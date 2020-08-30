@@ -15,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Netty服务端处理器
  * @Author: HYN
- * 2020/8/21 9:35 下午
  */
 @Slf4j
 public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> {

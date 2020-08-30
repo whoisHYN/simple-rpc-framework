@@ -9,7 +9,6 @@ import hyn.rpc.transport.socket.client.SocketClient;
  * 测试服务消费方
  *
  * @Author: HYN
- * 2020/8/20 9:29 下午
  */
 public class TestClient {
     public static void main(String[] args) throws InterruptedException {

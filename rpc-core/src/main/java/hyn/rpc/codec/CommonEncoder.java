@@ -10,7 +10,6 @@ import io.netty.handler.codec.MessageToByteEncoder;
 /**
  * 通用的编码拦截器
  * @Author: HYN
- * 2020/8/21 8:52 下午
  */
 public class CommonEncoder extends MessageToByteEncoder {
 

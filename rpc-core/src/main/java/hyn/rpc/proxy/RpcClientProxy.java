@@ -14,7 +14,6 @@ import java.lang.reflect.Proxy;
  * RPC客户端动态代理
  *
  * @Author: HYN
- * 2020/8/20 12:27 上午
  */
 @Slf4j
 public class RpcClientProxy implements InvocationHandler {

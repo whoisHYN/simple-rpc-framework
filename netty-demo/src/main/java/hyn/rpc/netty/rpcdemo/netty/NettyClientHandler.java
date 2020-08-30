@@ -8,7 +8,6 @@ import java.util.concurrent.Callable;
 /**
  * @Author: HYN
  * @Description:
- * @Date: 2020/8/18 2:28 下午
  * @Modified By:
  */
 public class NettyClientHandler extends ChannelInboundHandlerAdapter implements Callable<String> {

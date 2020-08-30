@@ -16,7 +16,6 @@ import java.util.List;
 /**
  * 通用的解码拦截器
  * @Author: HYN
- * 2020/8/21 8:52 下午
  */
 @Slf4j
 public class CommonDecoder extends ReplayingDecoder {

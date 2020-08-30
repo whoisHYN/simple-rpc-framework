@@ -15,7 +15,7 @@ public class NettyTestServer {
         RpcServer server = new NettyServer("localhost", 10000, 2);
         ServiceProvider provider = new DefaultServiceProvider();
         HelloService service = new HelloServiceImpl();
-        provider.addServiceProvider(service);
+//        provider.addServiceProvider(service);
         server.start();
     }
 }

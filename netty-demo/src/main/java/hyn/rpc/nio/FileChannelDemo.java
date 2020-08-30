@@ -10,7 +10,6 @@ import java.nio.channels.FileChannel;
 /**
  * @Author: HYN
  * @Description:
- * @Date: 2020/8/4 5:29 下午
  * @Modified By:
  */
 public class FileChannelDemo {

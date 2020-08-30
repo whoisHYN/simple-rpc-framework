@@ -13,7 +13,6 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * ServiceProvider 的默认实现
  * @Author: HYN
- * 2020/8/20 11:34 下午
  */
 @Slf4j
 public class DefaultServiceProvider implements ServiceProvider {
@@ -28,22 +27,15 @@ public class DefaultServiceProvider implements ServiceProvider {
      * @param <T>
      */
     @Override
-    public <T> void addServiceProvider(T service) {
-        String serviceName = service.getClass().getCanonicalName();
+    public <T> void addServiceProvider(T service, String serviceName) {
         //如果已经存在则结束执行
         if (registeredService.contains(serviceName)) {
             return;
         }
         registeredService.add(serviceName);
-        Class<?>[] interfaces = service.getClass().getInterfaces();
-        if (interfaces.length == 0) {
-            throw new RpcException(RpcError.SERVICE_NOT_IMPLEMENT_ANY_INTERFACE);
-        }
         //遍历所有接口，接口名就是服务名，加入CHM
-        for (Class<?> i : interfaces) {
-            serviceMap.put(i.getCanonicalName(), service);
-        }
-        log.info("向接口: {} 注册服务: {}", interfaces, serviceName);
+        serviceMap.put(serviceName, service);
+        log.info("向接口: {} 注册服务: {}", service.getClass().getInterfaces(), serviceName);
     }
 
     @Override

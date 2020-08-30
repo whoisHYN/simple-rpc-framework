@@ -6,7 +6,6 @@ import lombok.Getter;
 /**
  * RPC 调用过程中的各种错误状况
  * @Author: HYN
- * 2020/8/21 12:25 上午
  */
 @Getter
 @AllArgsConstructor

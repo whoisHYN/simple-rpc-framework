@@ -11,7 +11,6 @@ import hyn.test.impl.HelloServiceImpl;
 /**
  * 测试服务提供方
  * @Author: HYN
- * 2020/8/20 9:42 下午
  */
 public class TestServer {
     public static void main(String[] args) {
@@ -19,8 +18,8 @@ public class TestServer {
         HelloService helloService = new HelloServiceImpl();
         ByeService byeService = new ByeServiceImpl();
         ServiceProvider serviceProvider = new DefaultServiceProvider();
-        serviceProvider.addServiceProvider(helloService);
-        serviceProvider.addServiceProvider(byeService);
+//        serviceProvider.addServiceProvider(helloService);
+//        serviceProvider.addServiceProvider(byeService);
         SocketServer server = new SocketServer(serviceProvider);
         server.start(10000);
     }

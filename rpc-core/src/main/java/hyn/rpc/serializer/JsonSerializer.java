@@ -12,7 +12,6 @@ import java.io.IOException;
 /**
  * JSON序列化器
  * @Author: HYN
- * 2020/8/21 3:37 下午
  */
 @Slf4j
 public class JsonSerializer implements CommonSerializer {

@@ -8,7 +8,6 @@ import io.netty.handler.codec.http.HttpServerCodec;
 /**
  * @Author: HYN
  * @Description:
- * @Date: 2020/8/6 11:31 上午
  * @Modified By:
  */
 public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> {
